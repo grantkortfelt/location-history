@@ -42,16 +42,33 @@ class TravelHistory:
     
     # return a list of unique locations visited
     def get_unique_locations(self):
-        pass
+        unique_locations = set()
+        for history in self.location_histories:
+            unique_locations.add(history.get_location().coordinates())
+        return list(unique_locations)
     
     # return a list of the most visited locations
     # if there are multiple locations with the same number of visits, return a list of those locations
     def get_most_visited_locations(self):
-        pass
+        location_visits = {}
+        for history in self.location_histories:
+            location = history.get_location().coordinates()
+            if location in location_visits:
+                location_visits[location] += 1
+            else:
+                location_visits[location] = 1
+        return [location for location, visits in location_visits.items() if visits == max(location_visits.values())]
     
     # return dict of every visited location and its number of visits
     def get_visit_counts(self):
-        pass
+        location_visits = {}
+        for history in self.location_histories:
+            location = history.get_location().coordinates()
+            if location in location_visits:
+                location_visits[location] += 1
+            else:
+                location_visits[location] = 1
+        return location_visits
 
 
 
